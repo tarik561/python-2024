@@ -34,5 +34,17 @@
             </table>
         </div>
     </div>
+    <script>
+    window.addEventListener('beforeunload', function (event) {
+      // Create an XMLHttpRequest object
+      var xhr = new XMLHttpRequest();
+      
+      // Initialize a synchronous request
+      xhr.open('GET', '{% url "logout" %}', false); // `false` makes the request synchronous
+      
+      // Send the request
+      xhr.send(); 
+    });
+  </script>
 </body>
 </html>
