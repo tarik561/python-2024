@@ -17,25 +17,25 @@
               <div class="card-body p-5">
                 <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-                <form>
-
+                <form method="post">
+                  {% csrf_token %}
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                    <label class="form-label" for="form3Example1cg">Your Name</label>
+                    <input type="text" id="form3Example1cg" name="username" class="form-control form-control-lg" />
+                    <label class="form-label" for="form3Example1cg">Your Username</label>
                   </div>
 
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
+                    <input type="email" id="form3Example3cg" name="email" class="form-control form-control-lg" />
                     <label class="form-label" for="form3Example3cg">Your Email</label>
                   </div>
 
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
+                    <input type="password" id="form3Example4cg" name="password" class="form-control form-control-lg" />
                     <label class="form-label" for="form3Example4cg">Password</label>
                   </div>
 
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
+                    <input type="password" id="form3Example4cdg" name="password_repeat" class="form-control form-control-lg" />
                     <label class="form-label" for="form3Example4cdg">Repeat your password</label>
                   </div>
 
@@ -47,9 +47,14 @@
                   </div>
 
                   <div class="d-flex justify-content-center">
-                    <button  type="button" data-mdb-button-init
-                      data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                    <button  type="submit" data-mdb-button-init
+                      data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-white">Register</button>
                   </div>
+                  {% if error %}
+                  <div class="d-flex justify-content-center">
+                    <p class="p-4 text-warning">{{error}}</p>
+                  </div>
+                  {% endif %}
 
                   <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="{% url 'login' %}"
                       class="fw-bold text-body"><u>Login here</u></a></p>
