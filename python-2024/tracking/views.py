@@ -1,14 +1,22 @@
+from typing import Any
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.base import ContextMixin
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from .models import UserSession
 
 # Create your views here.
 class HomepageView(TemplateView):
   template_name = 'tracking/homepage.html'
 
+  def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+    context = super().get_context_data(**kwargs)
+    context.update({
+      'user_sessions': UserSession.objects.filter(user=self.request.user),
+    })
+    return context
 
 class RegisterView(TemplateView, ContextMixin):
   template_name = 'tracking/register.html'
